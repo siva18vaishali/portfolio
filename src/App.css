@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) rotate(20deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+
+.animate-float {
+  animation: float infinite ease-in-out;
+}
