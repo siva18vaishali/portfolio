@@ -3,7 +3,7 @@ import { FaEnvelope, FaGithub, FaLinkedin, FaInstagram} from "react-icons/fa";
 import { GraduationCap, School, BookOpen} from "lucide-react";
 import { Download, Target, Heart, Code } from "lucide-react";
 import DarkModeToggle from "./components/DarkModeToggle";
-import Scrollspy from "react-scrollspy";
+import Scrollspy from "react-scrollspy";  
 
 
 function Navbar() {
@@ -411,21 +411,24 @@ function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/contact", {
+      // Use your deployed backend URL
+      const res = await fetch("https://portfolio-backend-r2sm.onrender.com/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
         setStatus("✅ Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        setStatus("❌ Failed to send.");
+        setStatus(`❌ ${data.message || "Failed to send message."}`);
       }
     } catch (error) {
       console.error(error);
-      setStatus("⚠️ Error occurred.");
+      setStatus("⚠️ Network error. Please try again.");
     }
   };
 
